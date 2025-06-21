@@ -132,7 +132,7 @@ else
     #fi
     #LatestURL=$(grep -o 'https://www.minecraft.net/bedrockdedicatedserver/bin-linux/[^"]*' downloads/version.html)
     
-    LatestURL=$(https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.21.92.1.zip)
+    LatestURL="https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.21.92.1.zip"
     LatestFile=$(echo "$LatestURL" | sed 's#.*/##')
 
     echo "Latest version online is $LatestFile"
