@@ -124,15 +124,13 @@ if [ "$?" != 0 ]; then
     echo "Unable to connect to update website (internet connection may be down).  Skipping update ..."
 else
     # Download server index.html to check latest version
-    # Broken Code
-    #if [ -z "$QuietCurl" ]; then
-    #    curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RandNum.212 Safari/537.36" -o /minecraft/downloads/version.html https://www.minecraft.net/en-us/download/server/bedrock
-    #else
-    #    curl --no-progress-meter -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RandNum.212 Safari/537.36" -o /minecraft/downloads/version.html https://www.minecraft.net/en-us/download/server/bedrock
-    #fi
-    #LatestURL=$(grep -o 'https://www.minecraft.net/bedrockdedicatedserver/bin-linux/[^"]*' downloads/version.html)
-    
-    LatestURL=$(https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.21.92.1.zip)
+    if [ -z "$QuietCurl" ]; then
+        curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RandNum.212 Safari/537.36" -o /minecraft/downloads/version.html https://www.minecraft.net/en-us/download/server/bedrock
+    else
+        curl --no-progress-meter -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RandNum.212 Safari/537.36" -o /minecraft/downloads/version.html https://www.minecraft.net/en-us/download/server/bedrock
+    fi
+    LatestURL=$(grep -o 'https://www.minecraft.net/bedrockdedicatedserver/bin-linux/[^"]*' downloads/version.html)
+
     LatestFile=$(echo "$LatestURL" | sed 's#.*/##')
 
     echo "Latest version online is $LatestFile"
